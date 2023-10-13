@@ -19,7 +19,7 @@
         align-items: center; 
         background-color: #f0f0f0; 
       }
-      #randomBox { 
+      /*#randomBox { 
         padding: 20px; 
         border-radius: 10px; 
         text-align: center; 
@@ -34,7 +34,7 @@
         margin-top: -80px;
         margin-bottom: 15px;
         font-size: 30px;
-      }
+      }*/
       #buttons {
         padding: 20px; 
         border-radius: 20px; 
@@ -46,19 +46,35 @@
     </head>
     <body>
       <div class="container fondo-blanco">
-        <form action="/enviar" method="post">
-          <b><div id="titulo">Textos Aletorios</div></b>
+        <form action="" method="post" onsubmit="return false;">
+          <b><div id="titulo">Textos Aleatorios</div></b>
           <b><div id="randomBox" name="frase"></div></b>
           <input type="text" name="ip" style="display: none;" value="<%= clientIp %>"/>
           <input type="text" name="frase" id="frase" style="display: none;"/>
           <input type="text" name="colorFondo" id="colorFondo" style="display: none;"/>
           <input type="text"  name="colorLetra" id="colorLetra" style="display: none;"/>
           <div id="buttons">
-            <button type="submit" name="btnReaccion" class="btn btn-primary px-3" value="Me gusta">Si Gutar todo</button>
-            <button type="submit" name="btnReaccion" class="btn btn-secondary px-3" value="Me da asco">No gutar nada</button>
+            <button type="submit" name="btnReaccion" class="btn btn-primary px-3" value="Me gusta">Si Gustar todo</button>
+            <button type="submit" name="btnReaccion" class="btn btn-secondary px-3" value="Me da asco">No Gustar nada</button>
           </div>
         </form>
       </div>
+      
+      <script>
+        const form = document.querySelector('form');
+      
+        form.addEventListener('submit', function (event) {
+          // Evitar el envío del formulario predeterminado
+          event.preventDefault();
+          
+          // Simular un tiempo de espera (puedes quitar esto en tu implementación real)
+          setTimeout(function () {
+            // Recargar la página actual
+            location.reload();
+          }, 1000); // Recarga después de 1 segundo (ajusta el tiempo según tus necesidades)
+        });
+      </script>
+      
     
     
     <script>
