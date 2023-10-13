@@ -26,7 +26,7 @@ exports.enviar = async (req, res) => {
       ip
     };
     // Realiza una solicitud POST a la API con los datos
-    const response = await axios.post('https://api-2g00.onrender.com/crear', datos);
+    const response = await axios.post('https://redneuronalgp.onrender.com/crear', datos);
 
     // Responde a la solicitud en tu controlador de aplicación
     if (response.data.mensaje === '¡Registro guardado correctamente!') {
