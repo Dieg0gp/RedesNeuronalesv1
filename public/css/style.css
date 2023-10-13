@@ -18,3 +18,11 @@
   .btn-guardar:focus{
     box-shadow:0 0 0 3px rgba(121,82,179,0.25)
   }
+  .container {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    width:15%;
+    transition: background-color 0.5s, transform 0.3s;
+}
