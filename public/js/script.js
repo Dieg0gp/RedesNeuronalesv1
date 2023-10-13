@@ -1,118 +1,22 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles2.css">
-    <title>RedNeuronalv1</title>
-    <style>
-      body, html { 
-        height: 100%; 
-        width: 100%; 
-        margin: 0 0;
-        display: flex; 
-        justify-content: center; 
-        align-items: center; 
-        background-color: #f0f0f0; 
-      }
-      #randomBox { 
-        padding: 20px; 
-        border-radius: 10px; 
-        text-align: center; 
-        font-size: 30px;
-        background-color: #f0f0f0;
-      }
-      #titulo {
-        padding: 20px;
-        font-family: Arial, Helvetica, sans-serif;
-        border-radius: 10px; 
-        text-align: center;
-        margin-top: -80px;
-        margin-bottom: 15px;
-        font-size: 30px;
-      }
-      #buttons {
-        padding: 20px; 
-        border-radius: 20px; 
-        text-align: center;
-        margin-top: 10px;
-        font-family: Century Gothic;
-      }
-    </style>
-    </head>
-    <body>
-      <div class="container fondo-blanco">
-        <form action="" method="post" onsubmit="return false;">
-          <b><div id="titulo">Textos Aleatorios</div></b>
-          <b><div id="randomBox" name="frase"></div></b>
-          <input type="text" name="ip" style="display: none;" value="<%= clientIp %>"/>
-          <input type="text" name="frase" id="frase" style="display: none;"/>
-          <input type="text" name="colorFondo" id="colorFondo" style="display: none;"/>
-          <input type="text"  name="colorLetra" id="colorLetra" style="display: none;"/>
-          <div id="buttons">
-            <button type="submit" name="btnReaccion" class="btn btn-primary px-3" value="Me gusta">Si Gustar todo</button>
-            <button type="submit" name="btnReaccion" class="btn btn-secondary px-3" value="Me da asco">No Gustar nada</button>
-          </div>
-        </form>
-      </div>
+const randomText = document.getElementById('random-text');
+const likeButton = document.getElementById('like-button');
+const dislikeButton = document.getElementById('dislike-button');
+const body = document.body;
 
-      <div class="container">
-        <div id="random-text">Texto aleatorio</div>
-        <div class="buttons">
-            <button id="like-button">Si Gutar todo</button>
-            <button id="dislike-button">No gutar nada</button>
-        </div>
-    </div>
-    <script src="script.js"></script>
-      
-      <script>
-        const form = document.querySelector('form');
-      
-        form.addEventListener('submit', function (event) {
-          // Evitar el envío del formulario predeterminado
-          event.preventDefault();
-          
-          // Simular un tiempo de espera (puedes quitar esto en tu implementación real)
-          setTimeout(function () {
-            // Recargar la página actual
-            location.reload();
-          }, 1000); // Recarga después de 1 segundo (ajusta el tiempo según tus necesidades)
-        });
-      </script>
-      
-    
-    
-    <script>
-      function clicks(){
-        // Obtén el botón y el elemento donde mostrar el contador
-        const boton = document.getElementById('boton');
-        const contador = document.getElementById('contador');
-        // Inicializa el contador en 0
-        let clics = 0;
-        // Agrega un evento de clic al botón
-        boton.addEventListener('click', () => {
-          // Incrementa el contador en 1 cada vez que se hace clic
-          clics++;
-          // Actualiza el texto del contador
-          contador.textContent = `Clics: ${clics}`;
-        });
-      }
-      function getRandomColor() {
-        const colores = ["#F43545", "#FA8901", "#FAD717", "#00BA71", "#00C2DE", "#00418D", "#5F2879",  '#aabbcc', '#ffee00', '#ff5733', '#88ff00', '#ff00ff',];
-        let colorAleatorio;
-        do {
-          colorAleatorio = colores[Math.floor(Math.random() * colores.length)];
-        } while (colorAleatorio === document.body.style.backgroundColor);
-        return colorAleatorio;
-      }
-    
-      function getRandomPhrase() {
-        const phrases = [
+const textOptions = [
+    'Hola',
+    'Mundo',
+    'Gato',
+    'Perro',
+    'Amor',
+    'Felicidad',
+    'Libertad',
+    'Playa',
+    'Montaña',
+    'Naturaleza',
+    'Familia',
+    'Amigos',
+    'Aventura',
     "¿Por qué los estadounidenses son malos jugadores de ajedrez? Porque perdieron dos torres.",
     "¿Qué hace una mujer fuera de la cocina? -Turismo ",
     "A mis parientes mayores les gustaba burlarse de mí en las bodas, diciendo: ¡Tú serás el siguiente!. Pero dejaron de hacerlo enseguida cuando empecé a hacer lo mismo yo en los funerales.",
@@ -207,26 +111,37 @@
     "¿Cuál es el colmo de un libro? ¡Que en otoño se le caigan las hojas!",
     "¿Sabes que mi hermano anda en bicicleta desde los cinco años? ¿Ah sí? ¡Qué lejos debe de estar ya!",
 ];
-        return phrases[Math.floor(Math.random() * phrases.length)];
-      }
 
-      const color = getRandomColor();
-      const backColor = getRandomColor();
-      const randomBox = document.getElementById('randomBox');
-      //randomBox.style.backgroundColor = backColor;
-      randomBox.innerText = getRandomPhrase();
-      randomBox.style.color = color;
+const backgroundColors = [
+    '#f0f0f0', // Color de fondo predeterminado
+    '#aabbcc',
+    '#ffee00',
+    '#ff5733',
+    '#88ff00',
+    '#ff00ff'
+];
 
-      document.body.style.backgroundColor = getRandomColor();
+function generateRandomText() {
+    const randomIndex = Math.floor(Math.random() * textOptions.length);
+    const randomBackgroundColor = backgroundColors[Math.floor(Math.random() * backgroundColors.length)];
+    const randomTextColor = getRandomColor();
+    
+    randomText.textContent = textOptions[randomIndex];
+    body.style.backgroundColor = randomBackgroundColor;
+    randomText.style.color = randomTextColor;
+}
 
-      const titulo = document.getElementById('titulo');
-      //titulo.style.backgroundColor = backColor;
-      titulo.style.color = color;
+function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
 
-      document.getElementById("frase").value = randomBox.innerText;
-      document.getElementById("colorFondo").value = document.body.style.backgroundColor;
-      document.getElementById("colorLetra").value = randomBox.style.color;
-      
-    </script>
-    </body>
-</html>
+likeButton.addEventListener('click', generateRandomText);
+dislikeButton.addEventListener('click', generateRandomText);
+
+generateRandomText(); // Mostrar un texto aleatorio, fondo y color de texto aleatorios al cargar la página
+
